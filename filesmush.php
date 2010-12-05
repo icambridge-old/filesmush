@@ -3,7 +3,7 @@
 	/**
 	 * An adapation of Autosmush to work on the 
 	 * local filesystem. Got the idea from 
-	 * the folks WPEngine.
+	 * the folks at WPEngine.
 	 *
 	 * @author Iain Cambridge
 	 * @license http://backie.org/copyright/bsd-license/ BSD License
@@ -94,12 +94,12 @@
 		unset($newDirs);
 	} while( !empty($dirs) );
 	
-	$smushit = new SmushIt();
 	$totalUncompressed = 0;
 	$totalCompressed = 0;
 	$totalFiles = 0;
 	foreach($images as $image){
-	
+		
+		$smushit = new SmushIt();
 		$smushit->smushFile($image);
 		
 		if ( !$smushit->savings ){
@@ -114,11 +114,18 @@
 			continue;
 		}
 		
-		$fp = fopen($image, 'w+');
+		$tempImage = tempnam("/tmp","smush");
+		$fp = fopen($tempImage, "w+");
 		$ch = curl_init($smushit->compressedUrl);
 		curl_setopt($ch, CURLOPT_FILE, $fp);
 		curl_exec($ch);
 		curl_close($ch);
+		
+		if ( file_exists($tempImage) && is_readable($tempImage) 
+			&& filesize($tempImage) == $smushit->compressedSize){
+				copy($tempImage,$image);
+		}	
+		unlink($tempImage);
 		fclose($fp);
 		
 	}
