@@ -40,19 +40,19 @@
 		exit;
 	}
 	
-	if ( array_key_exists("t",$options) && array_key_exists("test",$options) ){
+	if ( array_key_exists("t",$options) || array_key_exists("test",$options) ){
 		define("TEST_MODE",true);
 	} else {
 		define("TEST_MODE",false);
 	}
 	
-	if ( array_key_exists("q",$options) && array_key_exists("quiet",$options) ){
+	if ( array_key_exists("q",$options) || array_key_exists("quiet",$options) ){
 		define("QUIET_MODE",true);
 	} else {
 		define("QUIET_MODE",false);
 	}
 	
-	if ( array_key_exists("c",$options) && array_key_exists("cron",$options) ){
+	if ( array_key_exists("c",$options) || array_key_exists("cron",$options) ){
 		define("CRON_MODE",true);
 	} else {
 		define("CRON_MODE",false);
@@ -81,6 +81,7 @@
 				if ( is_dir($entryName) ){
 					$newDirs[] = $entryName;
 				} elseif ( preg_match("~\.(jpe?g|gif|png)$~isU",$entryName) ){
+				
 					if ( ( !CRON_MODE ) || ( $timeFilter < filemtime($entryName)) ){
 						$images[] = $entryName;
 					}
