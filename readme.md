@@ -3,6 +3,19 @@ Filesmush
 
 Simple adaption of [Autosmush](http://github.com/tylerhall/Autosmush) for the local filesystem. For those who don't know what that is, it's simple it runs images on the local filesystem againist Yahoo!'s smushit service. And removes useless metadata from the images.
 
+How to use it
+-------------
+
+To smush all images 
+
+php filesmush.php -d <diretory> 
+
+To smush all images created/modified within the last 24 hours (suited for crontasks)
+
+php filesmush.php -d <directory> -c 
+
+Also has -t flag for testing to just show how much space would be saved. And -q flag to not print out anything other than errors.
+
 
 smushit-php
 -----------
