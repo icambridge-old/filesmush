@@ -58,7 +58,6 @@
 		define("CRON_MODE",false);
 	}
 	
-	//
 	print "Filesmush starting".PHP_EOL;
 	print "Getting filelist from ".$dir.PHP_EOL;
 		
