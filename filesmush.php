@@ -122,12 +122,12 @@
 		fclose($fp);
 		
 	}
-	
+	$percent = ($totalUncompressed === 0) ? 0 : round(($totalUncompressed - $totalCompressed) / $totalUncompressed * 100, 2) ;
 	qprint("Number of smused files  : ".$totalFiles);
 	qprint("Total uncompressed size : ".bytes2str($totalUncompressed));
 	qprint("Total compressed size   : ".bytes2str($totalCompressed));
 	qprint("Total savings           : ".bytes2str($totalUncompressed-$totalCompressed));
-	qprint("Totaly Savings %        : ".($totalUncompressed === 0) ? 0 : round(($totalUncompressed - $totalCompressed) / $totalUncompressed * 100, 2)  . "%"); 
+	qprint("Totaly Savings %        : ".$percent. "%"); 
 	/**
 	 * Handles the printing of non error messages,
 	 * got the idea from Tyler Hall's autosmush.
